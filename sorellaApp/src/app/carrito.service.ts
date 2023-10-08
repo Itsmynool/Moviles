@@ -17,7 +17,8 @@ export class CarritoService {
 
   agregarProducto(producto: any, cantidad: number) {
     // Verificar si el producto ya existe en el carrito
-    const index = this.carrito.findIndex((item) => item.producto.id === producto.id);
+    const index = this.carrito.findIndex((item) => item.producto._id === producto._id);
+    console.log("PRODUCTO.ID: ", producto._id);
 
     if (index !== -1) {
       // Si el producto ya existe, actualizar la cantidad
@@ -43,9 +44,10 @@ export class CarritoService {
   }
 
   obtenerItemDelCarrito(producto: any): boolean {
-    const index = this.carrito.findIndex((item) => item.producto.id === producto.id);
+    const index = this.carrito.findIndex((item) => item.producto._id === producto._id);
     return index !== -1;
   }
+  
 
   private actualizarLocalStorage() {
     // Actualizar los datos del carrito en localStorage

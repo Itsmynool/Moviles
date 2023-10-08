@@ -47,18 +47,17 @@ export class ProductosPage implements OnInit {
     console.log("CANTIDAD: ", cantidad);
     const productoEnCarrito = this.carritoService.obtenerItemDelCarrito(producto);
   
-    if (productoEnCarrito) {
-      console.log("SI");
-      //this.carritoService.actualizarCantidad(producto, cantidad)
-      // El producto ya está en el carrito, actualiza la cantidad
-      // Implementa la lógica para actualizar la cantidad
-    } else {
+    if (!productoEnCarrito) {
       console.log("NO");
       this.carritoService.agregarProducto(producto, cantidad);
       // El producto no está en el carrito, agrégalo
-      // Implementa la lógica para agregar el producto al carrito
+    } else {
+      console.log("SI");
+      // El producto ya está en el carrito, actualiza la cantidad
+      this.carritoService.agregarProducto(producto, cantidad);
     }
   }
+
 
   // Función para ver detalles
   viewDetails(producto: any) {
