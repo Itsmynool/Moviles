@@ -15,11 +15,7 @@ export class CarritoComponent {
   }
 
   eliminarDelCarrito(producto: any) {
-    const index = this.productosEnCarrito.indexOf(producto);
-    if (index !== -1) {
-      this.carritoService.eliminarProducto(index);
-      this.productosEnCarrito.splice(index, 1);
-    }
+    this.carritoService.eliminarProducto(producto._id)
   }
   
 }

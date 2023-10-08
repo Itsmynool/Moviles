@@ -32,12 +32,18 @@ export class CarritoService {
     this.actualizarLocalStorage();
   }
 
-  eliminarProducto(index: number) {
-    this.carrito.splice(index, 1);
-
-    // Actualizar los datos del carrito en localStorage
-    this.actualizarLocalStorage();
-  }
+  eliminarProducto(id: string) {
+    // Buscar el índice del producto en el carrito por su id
+    const index = this.carrito.findIndex((item) => item.producto.id === id);
+  
+    if (index !== -1) {
+      // Si se encuentra el producto por su id, eliminarlo del carrito
+      this.carrito.splice(index, 1);
+  
+      // Actualizar los datos del carrito en localStorage
+      this.actualizarLocalStorage();
+    }
+  }  
 
   obtenerProductos() {
     return this.carrito;
