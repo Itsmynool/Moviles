@@ -1,3 +1,4 @@
+// carrito.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -14,13 +15,26 @@ export class CarritoService {
     }
   }
 
-  agregarProducto(producto: any) {
-    this.carrito.push(producto);
+  agregarProducto(producto: any, cantidad: number) {
+    // Verificar si el producto ya existe en el carrito
+    const index = this.carrito.findIndex((item) => item.producto.id === producto.id);
+
+    if (index !== -1) {
+      // Si el producto ya existe, actualizar la cantidad
+      this.carrito[index].cantidad += cantidad;
+    } else {
+      // Si el producto no existe, agregarlo al carrito
+      this.carrito.push({ producto, cantidad });
+    }
+
+    // Actualizar los datos del carrito en localStorage
     this.actualizarLocalStorage();
   }
 
   eliminarProducto(index: number) {
     this.carrito.splice(index, 1);
+
+    // Actualizar los datos del carrito en localStorage
     this.actualizarLocalStorage();
   }
 
@@ -29,11 +43,12 @@ export class CarritoService {
   }
 
   obtenerItemDelCarrito(producto: any): boolean {
-    const index = this.carrito.findIndex((item) => item[0] === producto);
+    const index = this.carrito.findIndex((item) => item.producto.id === producto.id);
     return index !== -1;
   }
 
   private actualizarLocalStorage() {
+    // Actualizar los datos del carrito en localStorage
     localStorage.setItem('carrito', JSON.stringify(this.carrito));
   }
 }

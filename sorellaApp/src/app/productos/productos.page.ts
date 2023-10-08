@@ -49,11 +49,12 @@ export class ProductosPage implements OnInit {
   
     if (productoEnCarrito) {
       console.log("SI");
+      //this.carritoService.actualizarCantidad(producto, cantidad)
       // El producto ya está en el carrito, actualiza la cantidad
       // Implementa la lógica para actualizar la cantidad
     } else {
       console.log("NO");
-      this.carritoService.agregarProducto([producto, cantidad]);
+      this.carritoService.agregarProducto(producto, cantidad);
       // El producto no está en el carrito, agrégalo
       // Implementa la lógica para agregar el producto al carrito
     }

@@ -11,6 +11,7 @@ export class CarritoComponent {
 
   constructor(private carritoService: CarritoService) {
     this.productosEnCarrito = this.carritoService.obtenerProductos();
+    console.log("PRODUCTOS: ", this.productosEnCarrito)
   }
 
   eliminarDelCarrito(producto: any) {
