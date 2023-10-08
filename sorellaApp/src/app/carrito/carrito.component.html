@@ -8,14 +8,17 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let producto of productosEnCarrito">
-      <ion-thumbnail slot="start">
-        <img [src]="producto.producto.imagen" alt="{{ producto.producto.nombre }}" />
-      </ion-thumbnail>
+      <!-- ... -->
       <ion-label>
         <h2>{{ producto.producto.nombre }}</h2>
         <p>Cantidad: {{ producto.cantidad }}</p>
+        <p>Precio Unitario: {{ producto.producto.precio | currency }}</p>
+        <p>Precio Total: {{ (producto.producto.precio * producto.cantidad) | currency }}</p>
       </ion-label>
       <ion-button slot="end" color="danger" (click)="eliminarDelCarrito(producto)">Eliminar</ion-button>
+      <!-- ... -->
     </ion-item>
+    <p>Cantidad: {{ total }}</p>
   </ion-list>
+  <ion-button expand="full" color="success" (click)="realizarPago()">Pagar</ion-button>
 </ion-content>
