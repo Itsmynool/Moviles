@@ -14,7 +14,6 @@ export class CarritoComponent {
     this.productosEnCarrito = this.carritoService.obtenerProductos();
     for (let i = 0; i < this.productosEnCarrito.length; i++) {
       this.total += (this.productosEnCarrito[i].producto.precio * this.productosEnCarrito[i].cantidad);
-      // Realiza acciones con el producto aquí
     }
   }
 

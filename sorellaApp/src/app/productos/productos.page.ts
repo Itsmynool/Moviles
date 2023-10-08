@@ -12,6 +12,8 @@ import { CarritoService } from '../carrito.service'; // Asegúrate de usar la ru
 export class ProductosPage implements OnInit {
   selectedGender: string = '';
   productos: any[] = []; // Aquí almacenaremos los productos
+  currentPage: number = 1;
+  pageSize: number = 6;
 
   constructor(
     private mongodbService: MongodbService,
@@ -60,12 +62,30 @@ export class ProductosPage implements OnInit {
 
 
   // Función para ver detalles
-  viewDetails(producto: any) {
+  comprar(producto: any) {
     // Aquí puedes implementar la lógica para ver detalles
   }
 
-  // Función para agregar a favoritos
-  addToFavorites(producto: any) {
-    // Aquí puedes implementar la lógica para agregar a favoritos
+  getProductosPaginados(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.productos.slice(startIndex, endIndex);
   }
+
+  anteriorPagina() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+  
+  siguientePagina() {
+    if (this.currentPage < this.totalPaginas()) {
+      this.currentPage++;
+    }
+  }
+  
+  totalPaginas(): number {
+    return Math.ceil(this.productos.length / this.pageSize);
+  }
+  
 }
