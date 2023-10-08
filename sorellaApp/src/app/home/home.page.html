@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>SorellaApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="full" (click)="selectGender('MUJER')">MUJER</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" (click)="selectGender('HOMBRE')">HOMBRE</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

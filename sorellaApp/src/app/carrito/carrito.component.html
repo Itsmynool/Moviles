@@ -1,0 +1,16 @@
+<!-- carrito.component.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carrito de Compras</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let producto of productosEnCarrito">
+      <ion-label>{{ producto[0].nombre }}</ion-label>
+      <ion-label>{{ producto[1] }}</ion-label>
+      <ion-button (click)="eliminarDelCarrito(producto)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
