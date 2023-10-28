@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>tab4</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+      
+  <ion-button routerLink="/carrito">Ver Carrito</ion-button>
+
+    <app-productos [productos]="misProductos"></app-productos>
+
+
+  <ion-button [routerLink]="['/tabs/tab3']">
+    <ion-icon slot="start" name="star"></ion-icon>
+    Ir al tab 3
+  </ion-button>
+
+  <ion-button (click)="navegar()">
+    <ion-icon slot="start" name="star"></ion-icon>
+    Ir al tab con Click
+  </ion-button>
+
+</ion-content>

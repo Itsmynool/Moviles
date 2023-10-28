@@ -1,19 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-title>SorellaApp</ion-title>
-    </ion-buttons>
-    <ion-segment slot="end">
-      <ion-segment-button value="MUJER">
-        Mujer
-      </ion-segment-button>
-      <ion-segment-button value="HOMBRE">
-        Hombre
-      </ion-segment-button>
-    </ion-segment>
+    <ion-title>SORELLA</ion-title>
     <ion-buttons slot="end">
-      <ion-button>Iniciar Sesión</ion-button>
+      <ion-button (click)="iniciarSesion()">Iniciar Sesión</ion-button>
+      <ion-button (click)="registrarse()">Registrate</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-

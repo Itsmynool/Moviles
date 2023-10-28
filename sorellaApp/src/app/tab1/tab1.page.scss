@@ -1,0 +1,17 @@
+/* start.page.scss */
+
+ion-content{ --ion-background-color: #CCCCCC;  }
+  
+@media screen and (max-width: 767px) {
+    p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+}
+
+.custom-image {
+    width: 50%;
+    height: auto; 
+    display: block;
+    margin: 0 auto; 
+  }

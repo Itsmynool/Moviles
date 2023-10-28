@@ -1,0 +1,13 @@
+<p>
+  categorias sorella
+</p>
+<ion-grid fixed class="colorcito">
+  <ion-row>
+    <ion-col *ngFor="let categoria of categorias; let i = index"
+    size="12" size-lg="3" size-md="4" size-sm="6" size-xs="12"> 
+    <p> {{categoria.nombre}}</p>
+    <app-categoria [categoria] = "categoria" [index]="i+1"></app-categoria>
+
+  </ion-col>
+  </ion-row>
+</ion-grid>

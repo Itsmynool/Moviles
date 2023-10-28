@@ -1,0 +1,29 @@
+<ion-card>
+
+  <ion-card-header class="colorcito">
+    <ion-img [src]="producto.imagen" alt="Imagen del producto" class="img"></ion-img>
+    <ion-card-title>{{producto.nombre}}</ion-card-title>
+    <ion-card-subtitle > {{index}} {{producto.categoria.nombre}} - ${{producto.precio}}
+    </ion-card-subtitle>
+
+    <ion-button fill="outline">Adicionar</ion-button>
+    <ion-card-content>
+      <div class="quantity-selector">
+        <button (click)="producto.selectedQuantity = (producto.selectedQuantity > 0) ? producto.selectedQuantity - 1 : 0">-</button>
+        <span>{{ producto.selectedQuantity }}</span>
+        <button (click)="producto.selectedQuantity = producto.selectedQuantity + 1">+</button>
+      </div>
+    </ion-card-content>
+    <ion-card-content class="product-card-buttons">
+      <ion-button expand="full" color="primary" (click)="addToCart(producto, producto.selectedQuantity)" [disabled]="producto.selectedQuantity === 0">
+        Añadir al carrito
+      </ion-button>
+      <ion-button expand="full" color="secondary" (click)="comprar(producto)">Comprar</ion-button>
+    </ion-card-content>
+    
+  </ion-card-header>
+
+  <ion-card-content class="colorcito">
+    {{producto.nombre}}
+  </ion-card-content>
+</ion-card>

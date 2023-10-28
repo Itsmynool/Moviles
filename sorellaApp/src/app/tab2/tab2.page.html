@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Categorías</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-searchbar color="primary"></ion-searchbar>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let categorias of misCategorias">
+    <ion-button> {{ categorias.nombre }} </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!--<app-categorias [categorias]="misCategorias"></app-categorias>-->
+
+</ion-content>

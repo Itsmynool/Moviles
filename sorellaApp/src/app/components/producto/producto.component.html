@@ -1,0 +1,27 @@
+<ion-card>
+  <img 
+    alt="Silhouette of mountains" [src]= producto.imagen />
+    
+    <!-- 
+    <ion-button fill="outline" (click)="getStorage()">Mostrar Storage</ion-button>
+
+
+  <ion-slides pager="true" *ngIf="producto.linkvideo !== 'url_link_video'">
+    <ion-slide *ngFor="let multimedia of producto.linkvideo">
+      <img src="{{multimedia.url}}" />
+    </ion-slide>
+  </ion-slides>
+  -->
+
+  <ion-card-header>
+    <ion-card-title>{{producto.nombre}}</ion-card-title>
+    <ion-card-subtitle > {{index}} {{producto.categoria.nombre}} - {{producto.nombre}}
+    </ion-card-subtitle>
+
+    <ion-button fill="outline" (click)="guardaStorage()">Adicionar</ion-button>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{producto.nombre}}
+  </ion-card-content>
+</ion-card>

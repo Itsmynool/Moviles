@@ -11,4 +11,12 @@ export class NavbarComponent  implements OnInit {
 
   ngOnInit() {}
 
+  iniciarSesion() {
+    console.log('Se hizo clic en el botón de inicio de sesión');
+  }
+
+  registrarse() {
+    console.log('Se hizo clic en el botón de registrarse');
+  }
+
 }

@@ -4,19 +4,19 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
-import { MongodbService } from './services/mongodb.services';
-
+//Carpeta de Referencia para el servicio HTTP
 import { HttpClientModule } from '@angular/common/http';
 
-import { CarritoComponent } from './carrito/carrito.component'; // Asegúrate de que la ruta sea correcta
+import { CarritoComponent } from './components/carrito/carrito.component'; // Asegúrate de que la ruta sea correcta
+
 
 @NgModule({
-  declarations: [AppComponent, CarritoComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, MongodbService],
+  declarations: [AppComponent,CarritoComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule,AppRoutingModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
