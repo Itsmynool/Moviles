@@ -1,17 +1,49 @@
 /* start.page.scss */
 
-ion-content{ --ion-background-color: #CCCCCC;  }
+/* Para un fondo de imagen */
+body {
+  background-image: url('https://img.freepik.com/fotos-premium/mesa-madera-superior-vacia-supermercado-desenfoque-fondo_36051-467.jpg'); /* Reemplaza con la ruta de tu imagen */
+  background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+  background-position: center center; /* Centra la imagen */
+}
+
   
 @media screen and (max-width: 767px) {
-    p {
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
+  p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
 }
 
 .custom-image {
-    width: 50%;
-    height: auto; 
-    display: block;
-    margin: 0 auto; 
-  }
+  width: 50%;
+  height: auto; 
+  display: block;
+  margin: 0 auto; 
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+  
+.centered-text {
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad del 50% */
+  padding: 10px; /* Ajusta según sea necesario */
+  color: white; /* Texto blanco para contrastar con el fondo oscuro */
+}
+
+.centered-button {
+  --background: grey; /* Color de fondo gris para el botón */
+  --color: white; /* Texto blanco para contrastar con el fondo gris */
+  --padding-start: 30px; /* Ajusta según sea necesario */
+  --padding-end: 30px; /* Ajusta según sea necesario */
+}
+
+  
