@@ -1,10 +1,3 @@
-<!-- tab4.page.html -->
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>{{ titulo }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <ion-list *ngIf="productosEnCarrito.length > 0; else carritoVacio">
     <ion-item *ngFor="let item of productosEnCarrito">
@@ -13,7 +6,11 @@
       </ion-thumbnail>
       <ion-label>
         <h2>{{ item.producto?.nombre }}</h2>
-        <p>Cantidad: {{ item.cantidad }}</p>
+        <ion-item class="custom-quantity">
+          <ion-button (click)="decrementarCantidad(item)" [disabled]="item.cantidad <= 1">-</ion-button>
+          <ion-input type="text" [(ngModel)]="item.cantidad" readonly class="quantity-input"></ion-input>
+          <ion-button (click)="incrementarCantidad(item)">+</ion-button>
+        </ion-item>
         <p>Precio Unitario: {{ item.producto?.precio | currency }}</p>
         <p>Precio Total: {{ item.producto?.precio * item.cantidad | currency }}</p>
       </ion-label>

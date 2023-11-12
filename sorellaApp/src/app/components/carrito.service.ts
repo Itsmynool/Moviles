@@ -44,6 +44,30 @@ export class CarritoService {
     }
   }
 
+  incrementarCantidad(id: string) {
+    // Incrementar la cantidad del producto en el carrito
+    const index = this.carrito.findIndex((item) => item.producto?._id === id);
+
+    if (index !== -1) {
+      this.carrito[index].cantidad += 1;
+
+      // Actualizar los datos del carrito en localStorage
+      this.actualizarLocalStorage();
+    }
+  }
+
+  decrementarCantidad(id: string) {
+    // Decrementar la cantidad del producto en el carrito
+    const index = this.carrito.findIndex((item) => item.producto?._id === id);
+
+    if (index !== -1 && this.carrito[index].cantidad > 1) {
+      this.carrito[index].cantidad -= 1;
+
+      // Actualizar los datos del carrito en localStorage
+      this.actualizarLocalStorage();
+    }
+  }
+
   obtenerProductos() {
     return this.carrito;
   }

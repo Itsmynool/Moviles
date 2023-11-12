@@ -38,4 +38,14 @@ export class Tab4Page implements OnInit {
   realizarPago() {
     // Lógica para realizar el pago
   }
+
+  incrementarCantidad(item: any) {
+    this.carritoService.incrementarCantidad(item.producto._id);
+  }
+
+  decrementarCantidad(item: any) {
+    if (item.cantidad > 1) {
+      this.carritoService.decrementarCantidad(item.producto._id);
+    }
+  }
 }

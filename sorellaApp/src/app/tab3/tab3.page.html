@@ -10,8 +10,8 @@
 
   <!-- Mostrar el filtro actual y el botón para quitar el filtro -->
   <div *ngIf="parametro" class="filtro-section">
-    <p>Filtrado por: {{ parametro }} <ion-icon name="close" (click)="quitarFiltro()"></ion-icon></p>
-  </div>
+    <p>Filtrado por: {{ parametro }} <ion-icon name="close" (click)="quitarFiltro()" style="cursor: pointer;"></ion-icon></p>
+  </div>  
 
   <!-- Mostrar el botón para ver categorías cuando no hay filtro -->
   <ion-button *ngIf="!parametro" expand="full" color="primary" (click)="verCategorias()" class="ver-categorias-button">
