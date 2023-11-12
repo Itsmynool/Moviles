@@ -1,7 +1,7 @@
 // tab3.page.ts
 import { Component } from '@angular/core';
 import { MongodbService } from '../services/mongodb.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarritoService } from '../components/carrito.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class Tab3Page {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private mongodb: MongodbService,
     private carritoService: CarritoService
   ) {}
@@ -78,5 +79,18 @@ export class Tab3Page {
 
     // Llama a la función de tu servicio para agregar el producto al carrito
     this.carritoService.agregarProducto(producto, producto.cantidad);
+  }
+
+  quitarFiltro() {
+    // Limpiar el filtro y recargar los productos
+    this.parametro = '';
+    this.cargarArticulos().then(() => {
+      this.filtrarLista();
+    });
+  }
+
+  verCategorias() {
+    // Navegar al tab2
+    this.router.navigate(['/tabs/tab2']);
   }
 }

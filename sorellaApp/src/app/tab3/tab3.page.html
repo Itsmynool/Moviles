@@ -5,20 +5,51 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-searchbar (ionInput)="onSearch($event)"></ion-searchbar>
-
 <ion-content>
+  <ion-searchbar (ionInput)="onSearch($event)"></ion-searchbar>
+
+  <!-- Mostrar el filtro actual y el botón para quitar el filtro -->
+  <div *ngIf="parametro" class="filtro-section">
+    <p>Filtrado por: {{ parametro }} <ion-icon name="close" (click)="quitarFiltro()"></ion-icon></p>
+  </div>
+
+  <!-- Mostrar el botón para ver categorías cuando no hay filtro -->
+  <ion-button *ngIf="!parametro" expand="full" color="primary" (click)="verCategorias()" class="ver-categorias-button">
+    Ver Categorías
+  </ion-button>
+
   <ion-list>
-    <ion-item *ngFor="let articulo of misArticulos">
-      <ion-label>{{ articulo.nombre }}</ion-label>
-      <ion-item>
-        <!-- Usamos la propiedad 'label' para asociar la etiqueta con el input -->
-        <ion-label>Cantidad:</ion-label>
-        <ion-input type="number" [(ngModel)]="articulo.cantidad" min="1" placeholder="1" label="Cantidad"></ion-input>
-      </ion-item>
-      <ion-button slot="end" color="success" (click)="agregarAlCarrito(articulo)">
-        Añadir al carrito
-      </ion-button>
-    </ion-item>
+    <ion-row>
+      <ion-col size="4" *ngFor="let articulo of misArticulos">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ articulo.nombre }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-img [src]="articulo.imagen"></ion-img>
+            <p>{{ articulo.descripcion }}</p>
+            <p>Precio: {{ articulo.precio | currency }}</p>
+            <ion-item>
+              <ion-label>Cantidad:</ion-label>
+              <ion-input type="number" [(ngModel)]="articulo.cantidad" min="1" placeholder="1" label="Cantidad"></ion-input>
+            </ion-item>
+          </ion-card-content>
+
+          <ion-row>
+            <ion-col>
+              <ion-button color="success" (click)="agregarAlCarrito(articulo)">
+                Añadir al carrito
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button color="primary">
+                Comprar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </ion-list>
 </ion-content>
