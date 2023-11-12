@@ -1,6 +1,8 @@
+// tab3.page.ts
 import { Component } from '@angular/core';
 import { MongodbService } from '../services/mongodb.service';
-
+import { ActivatedRoute } from '@angular/router';
+import { CarritoService } from '../components/carrito.service';
 
 @Component({
   selector: 'app-tab3',
@@ -8,22 +10,73 @@ import { MongodbService } from '../services/mongodb.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  ngOnInit(){
-    this.cargarArticulos()
+  parametro: string = '';
+  terminoBusqueda: string = '';
+  misArticulos: any = [];
+  todosLosProductos: any = [];
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private mongodb: MongodbService,
+    private carritoService: CarritoService
+  ) {}
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      console.log('Parametro: ', params['categoria']);
+      this.parametro = params['categoria'];
+      this.cargarArticulos().then(() => {
+        console.log('Lista con filtro', this.misArticulos);
+        this.filtrarLista();
+      });
+    });
   }
-  misArticulos : any = [];
-  constructor(private mongodb:MongodbService) {}
 
   async cargarArticulos() {
-    //this.cargando = true;
     await this.mongodb
-      .getProductosComo("Collar")
+      .getProductos()
       .toPromise()
       .then((resp: any) => {
-        this.misArticulos = resp.results;
-
-        console.log('Articulos', this.misArticulos);
+        this.todosLosProductos = resp.productos;
+        this.misArticulos = this.todosLosProductos;
+        console.log('Artículos cargados:', this.misArticulos);
       });
   }
 
+  buscarArticulos() {
+    this.misArticulos = this.todosLosProductos.filter((producto: any) =>
+      producto.nombre.toLowerCase().includes(this.terminoBusqueda.toLowerCase())
+    );
+    this.filtrarLista();
+  }
+
+  filtrarLista() {
+    // Filtra solo si hay un parámetro de categoría presente
+    if (this.parametro) {
+      this.misArticulos = this.misArticulos.filter(
+        (producto: any) => producto.categoria.nombre.toLowerCase() === this.parametro.toLowerCase()
+      );
+    }
+  }
+
+  onSearch(event: any) {
+    this.terminoBusqueda = event.target.value;
+    if (this.terminoBusqueda.trim() === '') {
+      this.cargarArticulos().then(() => {
+        this.filtrarLista();
+      });
+    } else {
+      this.buscarArticulos();
+    }
+  }
+
+  agregarAlCarrito(producto: any) {
+    // Asegúrate de que la propiedad 'cantidad' existe en cada artículo antes de agregar al carrito
+    if (!producto.cantidad) {
+      producto.cantidad = 1;
+    }
+
+    // Llama a la función de tu servicio para agregar el producto al carrito
+    this.carritoService.agregarProducto(producto, producto.cantidad);
+  }
 }

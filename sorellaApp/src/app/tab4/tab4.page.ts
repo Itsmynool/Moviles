@@ -1,6 +1,5 @@
+// tab4.page.ts
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MongodbService } from '../services/mongodb.service';
 import { CarritoService } from '../components/carrito.service';
 
 @Component({
@@ -9,47 +8,34 @@ import { CarritoService } from '../components/carrito.service';
   styleUrls: ['./tab4.page.scss'],
 })
 export class Tab4Page implements OnInit {
-  titulo:string = 'Mi Titulo';
-  
-  imagenes = [1,2,3,4,5,6];
-    
-  misProductos: any = [];
+  titulo: string = 'Carrito de Compras';
 
-  constructor(private router: Router, 
-              private mongodb:MongodbService) { 
-
-              }
+  constructor(private carritoService: CarritoService) {}
 
   ngOnInit() {
-    let otroTitulo = 'Otro Titulo';
-    this.cambiarTitulo(otroTitulo);
-
-    this.cargarProductos()
+    console.log('Carrito: ', this.carritoService.obtenerProductos());
   }
 
-  cambiarTitulo(otroTitulo:string){
-    this.titulo = otroTitulo;    
+  get productosEnCarrito() {
+    return this.carritoService.obtenerProductos();
   }
 
-  navegar(){
-    this.router.navigate(['/tabs/tab3'])
-  }  
-
-
-  async cargarProductos() {
-    //this.cargando = true;
-    await this.mongodb
-      .getProductosComo("Collar")
-      .toPromise()
-      .then((resp: any) => {
-        this.misProductos = resp.results;
-
-        console.log('PRODUCTOS', this.misProductos);
-      });
+  get total() {
+    return this.productosEnCarrito.reduce(
+      (total, item) => total + item.producto.precio * item.cantidad,
+      0
+    );
   }
 
-  guardaStorage(){
-
+  eliminarDelCarrito(producto: any) {
+    if (producto && producto.producto && producto.producto._id) {
+      this.carritoService.eliminarProducto(producto.producto._id);
+    } else {
+      console.error('Producto o su identificador (_id) es nulo o indefinido.');
+    }
   }
 
+  realizarPago() {
+    // Lógica para realizar el pago
+  }
 }

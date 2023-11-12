@@ -4,15 +4,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-searchbar color="primary"></ion-searchbar>
+<ion-searchbar (ionInput)="onSearch($event)"></ion-searchbar>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let categorias of misCategorias">
-    <ion-button> {{ categorias.nombre }} </ion-button>
+    <ion-item *ngFor="let categoria of misCategorias" (click)="verProductos(categoria.nombre)">
+      <ion-button>{{ categoria.nombre }}</ion-button>
     </ion-item>
   </ion-list>
-
-  <!--<app-categorias [categorias]="misCategorias"></app-categorias>-->
-
 </ion-content>

@@ -1,25 +1,34 @@
+<!-- tab4.page.html -->
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>tab4</ion-title>
+    <ion-title>{{ titulo }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
+  <ion-list *ngIf="productosEnCarrito.length > 0; else carritoVacio">
+    <ion-item *ngFor="let item of productosEnCarrito">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="item.producto?.imagen"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.producto?.nombre }}</h2>
+        <p>Cantidad: {{ item.cantidad }}</p>
+        <p>Precio Unitario: {{ item.producto?.precio | currency }}</p>
+        <p>Precio Total: {{ item.producto?.precio * item.cantidad | currency }}</p>
+      </ion-label>
+      <ion-button slot="end" color="danger" (click)="eliminarDelCarrito(item)">
+        Eliminar
+      </ion-button>
+    </ion-item>
+    <p>Total: {{ total | currency }}</p>
+  </ion-list>
 
-      
-  <ion-button routerLink="/carrito">Ver Carrito</ion-button>
+  <ng-template #carritoVacio>
+    <ion-text color="medium" class="ion-text-center">
+      <p>El carrito está vacío</p>
+    </ion-text>
+  </ng-template>
 
-    <app-productos [productos]="misProductos"></app-productos>
-
-
-  <ion-button [routerLink]="['/tabs/tab3']">
-    <ion-icon slot="start" name="star"></ion-icon>
-    Ir al tab 3
-  </ion-button>
-
-  <ion-button (click)="navegar()">
-    <ion-icon slot="start" name="star"></ion-icon>
-    Ir al tab con Click
-  </ion-button>
-
+  <ion-button expand="full" color="success" (click)="realizarPago()">Pagar</ion-button>
 </ion-content>

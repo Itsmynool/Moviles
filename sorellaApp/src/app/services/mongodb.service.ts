@@ -7,28 +7,50 @@ import { URL_SERVICIOS } from 'src/config/url.servicios';
   providedIn: 'root'
 })
 export class MongodbService {
-  [x: string]: any;
 
   constructor(private http: HttpClient) { }
 
-  getProductosComo(unComo:string){
-    return this.http.get(`${URL_SERVICIOS}/buscar/productos/${unComo}`, {}).pipe(
-      map((res: any) => {
-        console.log('Productos',res);
-        return res;
-      })
-    );
-  }
-
-
-  getBuscarCategorias(): Observable<any> {
+  getCategorias(): Observable<any> {
     return this.http.get(`${URL_SERVICIOS}/categorias/`, {}).pipe(
       map((res: any) => {
-        console.log('Categorias', res);
+        //console.log('Categorias', res);
         return res;
       })
     );
   }
-  
 
+  getBuscarCategorias(terminoBusqueda: string): Observable<any> {
+    return this.http.get(`${URL_SERVICIOS}/buscar/categorias/${terminoBusqueda}`, {}).pipe(
+      map((res: any) => {
+        //console.log('Categorias', res);
+        return res;
+      })
+    );
+  }
+
+  getProductos(): Observable<any> {
+    return this.http.get(`${URL_SERVICIOS}/productos`, {}).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  getProductosComo(terminoBusqueda: string): Observable<any> {
+    return this.http.get(`${URL_SERVICIOS}/buscar/productos/${terminoBusqueda}`, {}).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+    getBuscarProductosPorCategoria(termino: string, categoria: string): Observable<any> {
+    const url = `${URL_SERVICIOS}/buscar/productos/${termino}/${categoria}`;
+    return this.http.get(url, {}).pipe(
+      map((res: any) => {
+        // console.log('Productos por categoría', res);
+        return res;
+      })
+    );
+  }
 }

@@ -1,24 +1,24 @@
-<ion-header [translucent]="true" class="color">
+<!-- tab3.page.html -->
+<ion-header>
   <ion-toolbar>
-    <ion-title>BUSCAR PRODUCTOS</ion-title>
-  </ion-toolbar>
-  <ion-toolbar>
-    <ion-searchbar></ion-searchbar>
+    <ion-title>Productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-<ion-header collapse="condense">
-  <ion-toolbar>
-    <ion-title size="large">Tab 2</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-searchbar (ionInput)="onSearch($event)"></ion-searchbar>
 
-<ion-button routerLink="/carrito">Ver Carrito</ion-button>
-
-
-<app-articulos [articulo]="misArticulos"></app-articulos>
- 
-
- 
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let articulo of misArticulos">
+      <ion-label>{{ articulo.nombre }}</ion-label>
+      <ion-item>
+        <!-- Usamos la propiedad 'label' para asociar la etiqueta con el input -->
+        <ion-label>Cantidad:</ion-label>
+        <ion-input type="number" [(ngModel)]="articulo.cantidad" min="1" placeholder="1" label="Cantidad"></ion-input>
+      </ion-item>
+      <ion-button slot="end" color="success" (click)="agregarAlCarrito(articulo)">
+        Añadir al carrito
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
