@@ -39,6 +39,9 @@ export class Tab3Page {
       .toPromise()
       .then((resp: any) => {
         this.todosLosProductos = resp.productos;
+        this.todosLosProductos.forEach((producto: any) => {
+          producto.cantidad = 1;
+        });
         this.misArticulos = this.todosLosProductos;
         console.log('Artículos cargados:', this.misArticulos);
       });
@@ -93,4 +96,17 @@ export class Tab3Page {
     // Navegar al tab2
     this.router.navigate(['/tabs/tab2']);
   }
+  // tab3.page.ts
+// ...
+
+incrementarCantidad(articulo: any) {
+  articulo.cantidad = (articulo.cantidad || 0) + 1;
+}
+
+decrementarCantidad(articulo: any) {
+  if (articulo.cantidad && articulo.cantidad > 1) {
+    articulo.cantidad--;
+  }
+}
+
 }

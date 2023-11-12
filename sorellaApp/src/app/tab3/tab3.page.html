@@ -19,26 +19,28 @@
   </ion-button>
 
   <ion-list>
-    <ion-row>
-      <ion-col size="4" *ngFor="let articulo of misArticulos">
+    <ion-row class="custom-row">
+      <ion-col size="12" size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let articulo of misArticulos" class="custom-col">
         <ion-card>
           <ion-card-header>
             <ion-card-title>{{ articulo.nombre }}</ion-card-title>
           </ion-card-header>
 
           <ion-card-content>
-            <ion-img [src]="articulo.imagen"></ion-img>
-            <p>{{ articulo.descripcion }}</p>
-            <p>Precio: {{ articulo.precio | currency }}</p>
-            <ion-item>
-              <ion-label>Cantidad:</ion-label>
-              <ion-input type="number" [(ngModel)]="articulo.cantidad" min="1" placeholder="1" label="Cantidad"></ion-input>
+            <ion-img [src]="articulo.imagen" class="custom-img"></ion-img>
+            <p class="descripcion">{{ articulo.descripcion }}</p>
+            <p class="precio">{{ articulo.precio | currency }}</p>
+
+            <ion-item class="custom-quantity">
+              <ion-button (click)="decrementarCantidad(articulo)" [disabled]="articulo.cantidad <= 1">-</ion-button>
+              <ion-input type="text" [(ngModel)]="articulo.cantidad" readonly class="quantity-input"></ion-input>
+              <ion-button (click)="incrementarCantidad(articulo)">+</ion-button>
             </ion-item>
           </ion-card-content>
 
-          <ion-row>
+          <ion-row class="custom-buttons-row">
             <ion-col>
-              <ion-button color="success" (click)="agregarAlCarrito(articulo)">
+              <ion-button color="success" (click)="agregarAlCarrito(articulo)" [disabled]="articulo.cantidad < 1">
                 Añadir al carrito
               </ion-button>
             </ion-col>
@@ -52,4 +54,5 @@
       </ion-col>
     </ion-row>
   </ion-list>
+  
 </ion-content>

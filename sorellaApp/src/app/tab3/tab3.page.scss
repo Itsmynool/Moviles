@@ -1,0 +1,84 @@
+/* styles.css o styles.scss */
+
+/* Limitar la cantidad de caracteres en el título */
+ion-card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px; /* Tamaño de fuente ajustado según tus necesidades */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+  
+/* Limitar la cantidad de caracteres en la descripción */
+ion-card-content p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px; /* Tamaño de fuente ajustado según tus necesidades */
+    margin-bottom: 10px;
+}
+
+.ver-categorias-button{
+    width: 100%;
+    padding: 10px 0;
+    --background: #3498db; /* Cambia el color de fondo según tu preferencia */
+}
+
+.custom-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-input {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    width: 50px; /* Ajusta según sea necesario */
+}
+
+.custom-img {
+    width: 100%; /* Ajusta según sea necesario */
+}
+
+.custom-buttons-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-buttons-row ion-button {
+    margin: 5px;
+}
+
+.custom-buttons-row ion-button[disabled] {
+    opacity: 0.5; /* Cambia la opacidad del botón deshabilitado según tu preferencia */
+}
+
+ion-card-content {
+    color: white;
+}
+
+ion-card-content p {
+    margin-bottom: 10px; /* Ajusta según sea necesario */
+}
+
+ion-card-content p:last-child {
+    margin-bottom: 0;
+}
+
+ion-card-content p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+ion-card-content p:first-child {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+ion-card-content p:last-child {
+    font-size: 16px; /* Ajusta según sea necesario */
+}
