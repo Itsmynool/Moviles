@@ -1,0 +1,12 @@
+<ion-content>
+  <div class="scanner-container">
+    <ion-button (click)="scanBarcode()" expand="full" color="primary">Escanear Código de Barras con camara</ion-button>
+
+    <div class="manual-input-container">
+      <ion-item lines="full">
+        <ion-input [(ngModel)]="manualBarcode" aria-label="Código de Barras" placeholder="Ingresar Código Manual"></ion-input>
+      </ion-item>
+      <ion-button (click)="submitManualBarcode()" expand="full" color="secondary">Enviar Código Manual</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -6,6 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class CarritoService {
   private carrito: any[] = [];
+  private descuento = 5000; // Valor del descuento
+  private codigosDescuentoValidos = ['12345', '67890', 'abcde'];
+  private valorDescuento: number = 0;
+  private codigosUsados: Set<string> = new Set();
 
   constructor() {
     // Obtener los datos del carrito almacenados en localStorage (si los hay)
@@ -13,6 +17,35 @@ export class CarritoService {
     if (carritoLocalStorage) {
       this.carrito = JSON.parse(carritoLocalStorage);
     }
+  }
+
+  restablecerDescuento() {
+    this.valorDescuento = 0;
+    this.codigosUsados.clear();
+    this.carrito = [];
+    this.actualizarLocalStorage();
+  }
+
+  aplicarDescuento(codigo: string): boolean {
+    if (this.codigosDescuentoValidos.includes(codigo) && 
+        this.valorDescuento === 0 && 
+        !this.codigosUsados.has(codigo)) {
+      
+      this.valorDescuento = 20000; // Establecer el valor del descuento
+      this.codigosUsados.add(codigo); // Añadir código a la lista de usados
+      return true;
+    }
+    return false;
+  }
+
+  obtenerValorDescuento(): number {
+    return this.valorDescuento;
+  }
+
+  obtenerDescuento(): number {
+    // Obtener el descuento del localStorage, si existe
+    const descuentoLocalStorage = localStorage.getItem('descuento');
+    return descuentoLocalStorage ? JSON.parse(descuentoLocalStorage) : 0;
   }
 
   agregarProducto(producto: any, cantidad: number) {

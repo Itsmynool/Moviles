@@ -1,4 +1,3 @@
-// tab4.page.ts
 import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../components/carrito.service';
 
@@ -27,6 +26,15 @@ export class Tab4Page implements OnInit {
     );
   }
 
+  get descuento() {
+    return this.carritoService.obtenerValorDescuento();
+  }
+
+  get totalConDescuento() {
+    const total = this.total;
+    return total > 0 ? total - this.descuento : 0;
+  }
+
   eliminarDelCarrito(producto: any) {
     if (producto && producto.producto && producto.producto._id) {
       this.carritoService.eliminarProducto(producto.producto._id);
@@ -36,7 +44,7 @@ export class Tab4Page implements OnInit {
   }
 
   realizarPago() {
-    // Lógica para realizar el pago
+    this.carritoService.restablecerDescuento();
   }
 
   incrementarCantidad(item: any) {

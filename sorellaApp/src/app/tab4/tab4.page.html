@@ -8,9 +8,10 @@
         <h2>{{ item.producto?.nombre }}</h2>
         <ion-item class="custom-quantity">
           <ion-button (click)="decrementarCantidad(item)" [disabled]="item.cantidad <= 1">-</ion-button>
-          <ion-input type="text" [(ngModel)]="item.cantidad" readonly class="quantity-input"></ion-input>
+          <ion-input type="text" [(ngModel)]="item.cantidad" readonly class="quantity-input" aria-label="Cantidad"></ion-input>
           <ion-button (click)="incrementarCantidad(item)">+</ion-button>
         </ion-item>
+        
         <p>Precio Unitario: {{ item.producto?.precio | currency }}</p>
         <p>Precio Total: {{ item.producto?.precio * item.cantidad | currency }}</p>
       </ion-label>
@@ -18,14 +19,20 @@
         Eliminar
       </ion-button>
     </ion-item>
+
+    <!-- Mostrar el total y el descuento si aplica -->
     <p>Total: {{ total | currency }}</p>
+    <div *ngIf="descuento > 0">
+      <p>Descuento: {{ descuento | currency }}</p>
+      <p>Total con Descuento: {{ totalConDescuento | currency }}</p>
+    </div>
+    <ion-button expand="full" color="success" (click)="realizarPago()">Pagar</ion-button>
   </ion-list>
+  
 
   <ng-template #carritoVacio>
     <ion-text color="medium" class="ion-text-center">
       <p>El carrito está vacío</p>
     </ion-text>
   </ng-template>
-
-  <ion-button expand="full" color="success" (click)="realizarPago()">Pagar</ion-button>
 </ion-content>

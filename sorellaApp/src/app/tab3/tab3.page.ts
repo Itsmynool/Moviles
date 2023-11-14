@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MongodbService } from '../services/mongodb.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarritoService } from '../components/carrito.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -19,7 +20,8 @@ export class Tab3Page {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private mongodb: MongodbService,
-    private carritoService: CarritoService
+    private carritoService: CarritoService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -82,6 +84,7 @@ export class Tab3Page {
 
     // Llama a la función de tu servicio para agregar el producto al carrito
     this.carritoService.agregarProducto(producto, producto.cantidad);
+    this.presentToast("Producto añadido al carrito exitosamente")
   }
 
   quitarFiltro() {
@@ -99,14 +102,22 @@ export class Tab3Page {
   // tab3.page.ts
 // ...
 
-incrementarCantidad(articulo: any) {
-  articulo.cantidad = (articulo.cantidad || 0) + 1;
-}
-
-decrementarCantidad(articulo: any) {
-  if (articulo.cantidad && articulo.cantidad > 1) {
-    articulo.cantidad--;
+  incrementarCantidad(articulo: any) {
+    articulo.cantidad = (articulo.cantidad || 0) + 1;
   }
-}
+
+  decrementarCantidad(articulo: any) {
+    if (articulo.cantidad && articulo.cantidad > 1) {
+      articulo.cantidad--;
+    }
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1500 // 3000 ms = 3 segundos
+    });
+    toast.present();
+  }
 
 }

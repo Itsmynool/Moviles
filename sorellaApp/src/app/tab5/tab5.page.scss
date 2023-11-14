@@ -1,0 +1,23 @@
+.scanner-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; // Espacio entre los botones y el input
+  
+    .manual-input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px; // Espacio entre el input y el botón
+  
+      ion-item {
+        --padding-start: 8px; // Espacio interno en ion-item
+        --padding-end: 8px;
+        --border-radius: 8px; // Bordes redondeados
+      }
+  
+      ion-button {
+        --border-radius: 8px; // Bordes redondeados para los botones
+      }
+    }
+  }
+  
