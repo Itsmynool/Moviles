@@ -27,6 +27,24 @@
       <p>Total con Descuento: {{ totalConDescuento | currency }}</p>
     </div>
     <ion-button expand="full" color="success" (click)="realizarPago()">Pagar</ion-button>
+
+    <ion-button (click)="obtenerUbicacion()">Ubicación</ion-button>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>Ubicación</ion-card-title>
+        {{ ubicacion }}
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>Coordenadas</ion-card-title>
+        <p *ngIf="coordenadas">Latitud: {{ coordenadas[0] }}</p>
+        <p *ngIf="coordenadas">Longitud: {{ coordenadas[1] }}</p>
+      </ion-card-content>
+    </ion-card>
+
   </ion-list>
   
 

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../components/carrito.service';
 
+import { Geolocation } from '@capacitor/geolocation';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@awesome-cordova-plugins/native-geocoder/ngx';
+
+
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -8,8 +12,14 @@ import { CarritoService } from '../components/carrito.service';
 })
 export class Tab4Page implements OnInit {
   titulo: string = 'Carrito de Compras';
+  nativegeocoder: any;
+  ubicacion: string | undefined;
+  coordenadas: any[] | undefined;
 
-  constructor(private carritoService: CarritoService) {}
+  constructor(
+    private carritoService: CarritoService, 
+    private nativeGeocoder: NativeGeocoder
+  ) { this.nativegeocoder = nativeGeocoder; }
 
   ngOnInit() {
     console.log('Carrito: ', this.carritoService.obtenerProductos());
@@ -54,6 +64,32 @@ export class Tab4Page implements OnInit {
   decrementarCantidad(item: any) {
     if (item.cantidad > 1) {
       this.carritoService.decrementarCantidad(item.producto._id);
+    }
+  }
+
+  async obtenerUbicacion() {
+    try {
+      // Obtener la posición actual
+      const position = await Geolocation.getCurrentPosition();
+
+      // Opciones para el geocodificador
+      const options: NativeGeocoderOptions = {
+        useLocale: true,
+        maxResults: 1
+      };
+
+      // Realizar geocodificación inversa para obtener la dirección
+      this.nativegeocoder.reverseGeocode(position.coords.latitude, position.coords.longitude, options)
+        .then((results: NativeGeocoderResult[]) => {
+          this.ubicacion = JSON.stringify(results[0]);
+          console.log('Ubicación:', this.ubicacion);
+        })
+        .catch((error: any) => console.error('Error en geocodificación:', error));
+
+      // Guardar las coordenadas
+      this.coordenadas = [position.coords.latitude, position.coords.longitude];
+    } catch (e) {
+      console.error('Error al obtener la ubicación:', e);
     }
   }
 }

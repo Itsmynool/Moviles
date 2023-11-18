@@ -12,11 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { CarritoComponent } from './components/carrito/carrito.component'; // Asegúrate de que la ruta sea correcta
 
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 @NgModule({
   declarations: [AppComponent,CarritoComponent],
   imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule,AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, NativeGeocoder],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
