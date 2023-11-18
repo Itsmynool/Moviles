@@ -30,7 +30,7 @@ export class Tab5Page {
       const result = await BarcodeScanner.startScan();
       if (result.hasContent) {
         this.processBarcode(result.content);
-        this.presentToast("Código escaneado correctamente");
+        this.presentToast("Código escaneado correctamente: " + result.content);
       }
     } catch (error) {
       this.presentToast("Error al escanear el código");
