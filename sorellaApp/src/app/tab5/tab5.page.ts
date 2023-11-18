@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { CarritoService } from '../components/carrito.service';
 import { ToastController } from '@ionic/angular';
 
@@ -12,7 +12,6 @@ export class Tab5Page {
   manualBarcode: string = '';
 
   constructor(
-    private barcodeScanner: BarcodeScanner, 
     private carritoService: CarritoService,
     private toastController: ToastController
   ) {}
@@ -25,15 +24,18 @@ export class Tab5Page {
     toast.present();
   }
 
-  scanBarcode() {
-    this.barcodeScanner.scan().then(barcodeData => {
-      if (!barcodeData.cancelled) {
-        this.processBarcode(barcodeData.text);
+  async scanBarcode() {
+    try {
+      await BarcodeScanner.checkPermission({ force: true });
+      const result = await BarcodeScanner.startScan();
+      if (result.hasContent) {
+        this.processBarcode(result.content);
         this.presentToast("Código escaneado correctamente");
       }
-    }).catch(err => {
-        console.error('Error', err);
-    });
+    } catch (error) {
+      this.presentToast("Error al escanear el código");
+      console.error('Error', error);
+    }
   }
 
   submitManualBarcode() {

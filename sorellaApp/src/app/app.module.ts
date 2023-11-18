@@ -6,7 +6,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 //Carpeta de Referencia para el servicio HTTP
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +16,7 @@ import { CarritoComponent } from './components/carrito/carrito.component'; // As
 @NgModule({
   declarations: [AppComponent,CarritoComponent],
   imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule,AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, BarcodeScanner],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
